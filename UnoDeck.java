@@ -39,8 +39,6 @@ public class UnoDeck {
         Collections.shuffle(deck);
     }
 
-    
-
     public static void PrintCard(){
         UnoDeck.reset();
         for(int i = 0; i < 108; i++){
