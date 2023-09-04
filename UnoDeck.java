@@ -53,4 +53,8 @@ public class UnoDeck {
     public static void removeCard(){
         deck.remove(0);
     }
+    
+    public static int getDeckSize() {
+    	return deck.size();
+    }
 }
