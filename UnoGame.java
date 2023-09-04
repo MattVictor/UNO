@@ -3,20 +3,25 @@ package Uno;
 import java.util.Scanner;
 
 public class UnoGame {
-    private static int i, j, nextPLayer = 0, cartaEscolhida, fluxo = 1;
+    private static int i, j, nextPLayer = 0, cartaEscolhida, sentido = 1;
     private static Scanner sc = new Scanner(System.in);
-
+    private static UnoCard pilha = new UnoCard(null, null);
+    
     public static void increaseI(){
-        i+=fluxo;
+        i+=sentido;
     }
 
     public static void setFluxo(int novoFluxo){
-        fluxo = novoFluxo;
+    	sentido = novoFluxo;
+    }
+    
+    public static void setCardColor(UnoCard ChoosedCard) {
+    	pilha = ChoosedCard;
     }
 
 public static void main(String[] args) {
         UnoDeck.reset(); // CRIANDO O DECK
-        System.out.println("NÃºmero de Jogadores: ");
+        System.out.println("Número de Jogadores: ");
         int numPlayers = sc.nextInt();
         UnoPlayer[] players = new UnoPlayer[numPlayers];
         for(i = 0; i < numPlayers; i++){
@@ -24,7 +29,6 @@ public static void main(String[] args) {
             players[i] = new UnoPlayer(sc.next());
         }
         i = 0;
-        UnoCard pilha = new UnoCard(null, null); // PRIMEIRA CARTA
         // JOGO
         while(true){
             System.out.printf("Carta atual: %s\n\n", pilha.toString());
@@ -33,9 +37,9 @@ public static void main(String[] args) {
             System.out.println();
             System.out.println("Escolha sua carta (nÃºmero negativo para puxar uma carta)");
             cartaEscolhida = sc.nextInt();
-            if(cartaEscolhida < 0){
+            if(cartaEscolhida < 0 && UnoDeck.getDeckSize() != 0){
                 players[i].drawCard();
-                i+=fluxo;
+                i+=sentido;
                 if(i == numPlayers){
                     i = 0;
                 }
@@ -44,14 +48,15 @@ public static void main(String[] args) {
                 pilha = players[i].getCard(cartaEscolhida);
                 UnoFuncs.blockCard(pilha);
                 UnoFuncs.reverseCard(pilha);
-                if(i == 0 && fluxo < 0){
-                    nextPLayer = numPlayers + fluxo;
+                UnoFuncs.chooseColor(pilha);
+                if(i == 0 && sentido < 0){
+                    nextPLayer = numPlayers + sentido;
                 }
-                else if(i == numPlayers-1 && fluxo > 0){
+                else if(i == numPlayers-1 && sentido > 0){
                     nextPLayer = 0;
                 }
                 else{
-                    nextPLayer+=fluxo;
+                    nextPLayer+=sentido;
                 }
                 for(j = 0; j < UnoFuncs.draw(players[i].getCard(cartaEscolhida)); j++){
                     players[nextPLayer].drawCard();
@@ -61,7 +66,7 @@ public static void main(String[] args) {
                     break;
                 }
                 players[i].putCard(cartaEscolhida);
-                i+=fluxo;
+                i+=sentido;
                 if(i == numPlayers){
                     i = 0;
                 }
