@@ -80,12 +80,21 @@ public class UnoGame {
             players[i].printPlayer();
 
             System.out.println();
-            System.out.println("\u001B[37mEscolha sua carta (número negativo para puxar uma carta)");
+            System.out.println("\u001B[37mEscolha sua carta (número negativo para puxar uma carta, ou passar)");
             cartaEscolhida = sc.nextInt();
 
             if(cartaEscolhida < 0 && UnoDeck.getDeckSize() != 0){
                 Outro.LimpaConsole();
                 players[i].drawCard();
+                i+=direction;
+                if(i == numPlayers){
+                    i = 0;
+                }
+                else if(i < 0){
+                    i = numPlayers-1;
+                }
+            }
+            else if(cartaEscolhida < 0 && UnoDeck.getDeckSize() == 0){
                 i+=direction;
                 if(i == numPlayers){
                     i = 0;
@@ -104,6 +113,11 @@ public class UnoGame {
                     Outro.LimpaConsole();
                     System.out.printf("Ganhador: %s\n", players[i].getName());
                     break;
+                }else if(players[i].checkSize() == 1){
+                    if(!UnoRules.sayUNO()){
+                        players[i].drawCard();
+                        players[i].drawCard();
+                    }
                 }
                 
                 switch(pilha.getValue()){
