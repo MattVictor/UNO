@@ -32,28 +32,17 @@ public class UnoRules {
 
     public static void draw(UnoCard cartaPlayer){// Cartas do tipo "Draw", puxar mais cartas
         int j;
-        int nextPLayer = UnoGame.getI();
-        // Verificando quem é o próximo jogador para não exceder o limite do array 
-        if(UnoGame.getI() == 0 && UnoGame.getDirection() < 0){
-            nextPLayer = UnoGame.getNumPlayers() + UnoGame.getDirection();
-        }
-        else if(UnoGame.getI() == UnoGame.getNumPlayers()-1 && UnoGame.getDirection() > 0){
-            nextPLayer = 0;
-        }
-        else{
-            nextPLayer+=UnoGame.getDirection();
-        }
+        System.out.println(UnoGame.NextPlayer());
         if(cartaPlayer.getValue() == Value.DRAW_TWO){
             for(j = 0; j < 2; j++){
-                UnoGame.getPlayer(nextPLayer).drawCard();
+                UnoGame.getPlayer(UnoGame.NextPlayer()).drawCard();
             }
         }
         else if(cartaPlayer.getValue() == Value.DRAW_FOUR){
             for(j = 0; j < 4; j++){
-                UnoGame.getPlayer(nextPLayer).drawCard();
+                UnoGame.getPlayer(UnoGame.NextPlayer()).drawCard();
             }
         }
-
     }
     
     public static void chooseColor(UnoCard cartaPlayer) {// Carta de escolher a cor
