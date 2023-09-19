@@ -5,8 +5,6 @@ import java.util.Collections;
 
 public class UnoDeck {
     private static ArrayList<UnoCard> deck = new ArrayList<UnoCard>();
-    // static ArrayList<UnoCard> deck;
-    // //Arrays.asList(arrayDeck);
     private static int cardsDeck;
 
     public static void reset(){
@@ -23,35 +21,28 @@ public class UnoDeck {
                 deck.add(cardsDeck++, new UnoCard(color, UnoCard.Value.getValue(j)));
             }
 
-            UnoCard.Value[] values = new UnoCard.Value[]{UnoCard.Value.Draw_Two, UnoCard.Value.Block, UnoCard.Value.Reverse};
+            UnoCard.Value[] values = new UnoCard.Value[]{UnoCard.Value.DRAW_TWO, UnoCard.Value.BLOCK, UnoCard.Value.REVERSE};
             for(UnoCard.Value value : values){
                 deck.add(cardsDeck++, new UnoCard(color, value));
                 deck.add(cardsDeck++, new UnoCard(color, value));
             }
         }
 
-            UnoCard.Value[] values = new UnoCard.Value[]{UnoCard.Value.Choose_Color, UnoCard.Value.Draw_Four};
+            UnoCard.Value[] values = new UnoCard.Value[]{UnoCard.Value.CHOOSE_COLOR, UnoCard.Value.DRAW_FOUR};
             for(UnoCard.Value value : values){
                 for(int i = 0; i < 4; i++){
-                    deck.add(cardsDeck++, new UnoCard(UnoCard.Color.Wild, value));
+                    deck.add(cardsDeck++, new UnoCard(UnoCard.Color.WILD, value));
                 }
             }
         Collections.shuffle(deck);
     }
 
-    public static void PrintCard(){
-        UnoDeck.reset();
-        for(int i = 0; i < 108; i++){
-            System.out.println(deck.get(i).toString());
-        }
+    public static UnoCard getCard(int i){
+        return deck.get(i);
     }
 
-    public static UnoCard getCard(){
-        return deck.get(0);
-    }
-
-    public static void removeCard(){
-        deck.remove(0);
+    public static void removeCard(int i){
+        deck.remove(i);
     }
     
     public static int getDeckSize() {
