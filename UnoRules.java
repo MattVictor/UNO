@@ -64,7 +64,17 @@ public class UnoRules {
     	}
     }
 
-    public static void sayUNO(){
-
+    public static boolean sayUNO(){
+        String uno = "UNO";
+        String spell;
+        Scanner sc = new Scanner(System.in);
+        long before = System.currentTimeMillis();
+        System.out.println("Digite UNO: ");
+        spell = sc.next();
+        long after = System.currentTimeMillis();
+        if(uno.compareTo(spell.toUpperCase()) == 0 && (after - before) < 3000){
+            return true;
+        }
+        return false;
     }
 }
