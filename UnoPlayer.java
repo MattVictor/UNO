@@ -21,14 +21,14 @@ public class UnoPlayer {
     public UnoPlayer(String name){
         setName(name);
         for(int i = 0; i < 7; i++){
-            playerDeck.add(i, UnoDeck.getCard());
-            UnoDeck.removeCard();
+            playerDeck.add(i, UnoDeck.getCard(0));
+            UnoDeck.removeCard(0);
         }
     }
 
     public void printPlayer(){
         for(int i = 0; i < playerDeck.size(); i++){
-            System.out.printf("%d - %s\n", i, playerDeck.get(i));
+            System.out.println("\u001B[37m"+ i + " - " + Outro.printCard(playerDeck.get(i)));
         }
     }
 
@@ -37,12 +37,11 @@ public class UnoPlayer {
     }
 
     public void drawCard(){
-        playerDeck.add(UnoDeck.getCard());
-        UnoDeck.removeCard();
+        playerDeck.add(UnoDeck.getCard(0));
+        UnoDeck.removeCard(0);
     }
 
     public int checkSize(){
         return playerDeck.size();
     }
 }
-
