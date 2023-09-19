@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class UnoGame {
-    private static int i;
+    private static int i, j;
     private static int cartaEscolhida, direction = 1;
     private static int numPlayers;
     private static Scanner sc = new Scanner(System.in);
@@ -35,12 +35,22 @@ public class UnoGame {
         return numPlayers;
     }
 
-    public static UnoPlayer getPlayer(int i){
-        return players[i];
-    }
-
     public static void setCardColor(UnoCard ChoosedCard) {
     	pilha = ChoosedCard;
+    }
+
+    public static UnoPlayer getPlayer(int index){
+        return players[index];
+    }
+
+    public static int NextPlayer(){
+        if(i == 0 && direction < 0){
+            return numPlayers-1;
+        }
+        else if(i == numPlayers-1 && direction > 0){
+            return 0;
+        }
+        return i+direction;
     }
     
     public static void main(String[] args) throws InterruptedException, IOException {
@@ -55,7 +65,7 @@ public class UnoGame {
         pilha = UnoDeck.getCard(0);
         UnoDeck.removeCard(0);
 
-        UnoPlayer[] players = new UnoPlayer[numPlayers];
+        players = new UnoPlayer[numPlayers];
         for(i = 0; i < numPlayers; i++){
             System.out.printf("Nome do jogador %d: ", (i+1));
             players[i] = new UnoPlayer(sc.next());
