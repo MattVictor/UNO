@@ -2,7 +2,7 @@ package Uno;
 
 public class UnoCard {
     enum Color {
-        Red, Blue, Green, Yellow, Wild;
+        RED, BLUE, GREEN, YELLOW, WILD;
         private static final Color[] colors = Color.values();
         public static Color getColor(int i){
             return Color.colors[i];
@@ -10,7 +10,7 @@ public class UnoCard {
     }
 
     enum Value {
-        Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Draw_Two, Block, Reverse, Choose_Color, Draw_Four;
+        ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, DRAW_TWO, BLOCK, REVERSE, CHOOSE_COLOR, DRAW_FOUR;
         private static final Value[] values = Value.values();
         public static Value getValue(int i){
             return Value.values[i];
